@@ -14,6 +14,7 @@ public class WhatsappView {
 			System.out.println("****************MAIN MENU***************");
 			System.out.println("press 1 to create profile");
 			System.out.println("press 2 to view profile");
+			System.out.println("press 3 to view all data");
 
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Enter your choice");
@@ -26,6 +27,7 @@ public class WhatsappView {
 				break;
 			case 2 : wc.viewProfileController();
 				break;
+			case 3 : wc.viewAllProfile();
 				default:System.out.println("wrong choice");
 			}
 		}

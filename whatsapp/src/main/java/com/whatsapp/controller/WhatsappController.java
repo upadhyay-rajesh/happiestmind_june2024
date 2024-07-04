@@ -1,10 +1,13 @@
 package com.whatsapp.controller;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 import com.whatsapp.entity.WhatsappUser;
 import com.whatsapp.service.WhatsappService;
 import com.whatsapp.service.WhatsappServiceInterface;
+import com.whatsapp.utility.SortByAddress;
 
 public class WhatsappController implements WhatsappControllerInterface {
 
@@ -67,6 +70,37 @@ public class WhatsappController implements WhatsappControllerInterface {
 		 else {
 			 System.out.println("Profile not exist for email id "+email);
 		 }
+		
+	}
+
+	@Override
+	public void viewAllProfile() {
+		WhatsappServiceInterface ws=new WhatsappService();
+		List<WhatsappUser> ll=  ws.viewAllProfileService();
+		
+		System.out.println(ll.size()+"    record found");
+		
+		System.out.println("record unsorted");
+		
+		for(WhatsappUser w1:ll) {
+			 System.out.println("*************************************** ");
+			 System.out.println("Name is "+w1.getName());
+			 System.out.println("Password is "+w1.getPassword());
+			 System.out.println("Email is "+w1.getEmail());
+			 System.out.println("Address is "+w1.getAddress());
+		}
+		
+		Collections.sort(ll, new SortByAddress());
+		
+		System.out.println("record in sorted order");
+		
+		for(WhatsappUser w1:ll) {
+			 System.out.println("*************************************** ");
+			 System.out.println("Name is "+w1.getName());
+			 System.out.println("Password is "+w1.getPassword());
+			 System.out.println("Email is "+w1.getEmail());
+			 System.out.println("Address is "+w1.getAddress());
+		}
 		
 	}
 

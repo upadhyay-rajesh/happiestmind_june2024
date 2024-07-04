@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.whatsapp.entity.WhatsappUser;
 
@@ -77,6 +79,40 @@ public class WhatsappDAO implements WhatsappDAOInterface {
 			e.printStackTrace();
 		}
 		return w1;
+	}
+
+	@Override
+	public List<WhatsappUser> viewAllProfileDAO() {
+		List<WhatsappUser> ll=new ArrayList<WhatsappUser>();
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/happiestminddb","root","root");
+			PreparedStatement ps=con.prepareStatement("select * from whatsappuser");
+			
+			ResultSet res=ps.executeQuery();
+			
+			while(res.next()) {
+				String n=res.getString(1);
+				String p=res.getString(2);
+				String e=res.getString(3);
+				String a=res.getString(4);
+				
+				//DTO
+				WhatsappUser w1=new WhatsappUser();
+				w1.setName(n);
+				w1.setPassword(p);
+				w1.setEmail(e);
+				w1.setAddress(a);
+				
+				ll.add(w1);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ll;
 	}
 
 }

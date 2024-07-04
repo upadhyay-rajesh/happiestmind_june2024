@@ -6,4 +6,6 @@ public interface WhatsappControllerInterface {
 
 	void viewProfileController();
 
+	void viewAllProfile();
+
 }
